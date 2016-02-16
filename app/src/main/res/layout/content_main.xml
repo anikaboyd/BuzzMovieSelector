@@ -33,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,7 +46,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:id="@+id/password"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"/>
 
     <Button
         android:layout_width="match_parent"
@@ -59,6 +61,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Not already a user? Register"
+        android:textStyle="bold"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
         android:onClick="register"
