@@ -1,6 +1,7 @@
 package howimetyourmotherboard.buzzmovieselector;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,12 +14,18 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     EditText username;
     EditText password;
+    static User currentUser = null;
+    HashMap<String,User> userStore = Register.getUserStore();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +33,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         Typeface type = Typeface.createFromAsset(getAssets(),"bakery.ttf");
         TextView textView = (TextView) findViewById(R.id.welcome);
@@ -65,16 +64,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static User getCurrentUser() {
+        return currentUser;
+    }
     public void onClick(View v) {
         String name = username.getText().toString();
         String pass = password.getText().toString();
 
-        if ((name.equals("user")) && (pass.equals("pass"))) {
+        if ((userStore.containsKey(name)) && userStore.get(name).getPassword().equals(pass)) {
+            currentUser = userStore.get(name);
             Intent intent = new Intent(this,Home.class);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(),
-                    "Username or password is incorrect",Toast.LENGTH_LONG).show();
+                    "Username or password is incorrect.",Toast.LENGTH_LONG).show();
         }
     }
 
