@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+
 public class Profile extends AppCompatActivity {
     HashMap<String, User> userStore;
     User currentUser;
