@@ -17,21 +17,19 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void logout (View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
-    }
-
-    public void viewProfile(View view) {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
-
-    public void newRelease(View view) {
-        APIFunctions newRelease = new APIFunctions();
-        newRelease.newRelease(this);
     }
 }
