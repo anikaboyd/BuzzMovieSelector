@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="howimetyourmotherboard.buzzmovieselector">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,16 +30,7 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Profile"
-            android:label="@string/title_activity_profile"
-            android:parentActivityName=".Home"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="howimetyourmotherboard.buzzmovieselector.Home" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
