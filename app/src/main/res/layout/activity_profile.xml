@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="howimetyourmotherboard.buzzmovieselector.Register">
+    tools:context="howimetyourmotherboard.buzzmovieselector.Profile">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,6 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_register" />
+    <include layout="@layout/content_profile" />
+
 
 </android.support.design.widget.CoordinatorLayout>
