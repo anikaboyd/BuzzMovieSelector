@@ -1,6 +1,7 @@
 package howimetyourmotherboard.buzzmovieselector;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,12 +14,28 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
+
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Downloader;
+import org.json.*;
 
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     EditText username;
     EditText password;
+    static User currentUser = null;
+    HashMap<String,User> userStore = Register.getUserStore();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         Typeface type = Typeface.createFromAsset(getAssets(),"bakery.ttf");
         TextView textView = (TextView) findViewById(R.id.welcome);
@@ -41,6 +50,41 @@ public class MainActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String API_KEY  = "yedukp76ffytfuy24zsqk7f5";
+        String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?apikey=" + API_KEY;
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                       //Log.i("Reponse: ", response);
+                        try{
+                            JSONObject mainObj = new JSONObject(response);
+                            JSONArray movArr = mainObj.getJSONArray("movies");
+                            for(int i = 0; i < movArr.length(); i++){
+                                JSONObject ith = movArr.getJSONObject(i);
+                                String title = ith.getString("title");
+                                Log.i("Title: ", title);
+                            }
+                        } catch (JSONException e){
+                            Log.i("HELLO", "JSON PARSE ERROR");
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("Error: ", "Damn it");
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
     }
 
     @Override
@@ -65,16 +109,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static User getCurrentUser() {
+        return currentUser;
+    }
     public void onClick(View v) {
         String name = username.getText().toString();
         String pass = password.getText().toString();
 
-        if ((name.equals("user")) && (pass.equals("pass"))) {
+        if ((userStore.containsKey(name)) && userStore.get(name).getPassword().equals(pass)) {
+            currentUser = userStore.get(name);
             Intent intent = new Intent(this,Home.class);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(),
-                    "Username or password is incorrect",Toast.LENGTH_LONG).show();
+                    "Username or password is incorrect.",Toast.LENGTH_LONG).show();
         }
     }
 
