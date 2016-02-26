@@ -29,4 +29,9 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
+
+    public void newRelease(View view) {
+        APIFunctions newRelease = new APIFunctions();
+        newRelease.newRelease(this);
+    }
 }
