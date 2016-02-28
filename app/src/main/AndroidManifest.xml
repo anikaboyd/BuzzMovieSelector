@@ -42,6 +42,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="howimetyourmotherboard.buzzmovieselector.Home" />
         </activity>
+        <activity
+            android:name=".NewReleases"
+            android:label="@string/title_activity_new_releases"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="howimetyourmotherboard.buzzmovieselector.Home" />
+        </activity>
     </application>
 
 </manifest>
