@@ -16,6 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Downloader;
+import org.json.*;
+
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
@@ -23,7 +33,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     EditText username;
     EditText password;
-    static User currentUser = null;
+    private static User currentUser = null;
     HashMap<String,User> userStore = Register.getUserStore();
 
     @Override
@@ -40,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+
+
+
     }
 
     @Override
