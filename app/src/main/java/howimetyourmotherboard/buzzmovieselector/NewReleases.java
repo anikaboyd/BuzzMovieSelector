@@ -21,7 +21,6 @@ import org.json.JSONObject;
 
 public class NewReleases extends AppCompatActivity {
     TextView movies;
-    ScrollView svNR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,6 @@ public class NewReleases extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         movies = (TextView) findViewById(R.id.movieList);
-
-        svNR = (ScrollView) findViewById(R.id.svnewrealeases);
         newReleases(this);
     }
 

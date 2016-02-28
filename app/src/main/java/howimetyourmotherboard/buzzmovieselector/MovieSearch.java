@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -22,29 +23,38 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class NewMovies extends AppCompatActivity {
-    TextView movies;
+import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 
+public class MovieSearch extends AppCompatActivity {
+    TextView movies;
+    EditText search;
+    String searchWord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_movies);
+        setContentView(R.layout.activity_movie_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        movies = (TextView) findViewById(R.id.movieList);
-        newMovies(this);
     }
 
+    public void search(View view) throws UnsupportedEncodingException{
+        movies = (TextView) findViewById(R.id.resultsList);
+        search = (EditText) findViewById(R.id.searchMovies);
+        searchWord = search.getText().toString();
+        searchWord = URLEncoder.encode(searchWord, "utf-8");
+        searchMovies(this);
+    }
 
-    public void newMovies (final Context context) {
+    public void searchMovies (final Context context) {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
         String API_KEY = "yedukp76ffytfuy24zsqk7f5";
-        String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json?apikey=" + API_KEY;
+        String url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=" + API_KEY + "&q=" + searchWord;
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -60,6 +70,7 @@ public class NewMovies extends AppCompatActivity {
                                 JSONObject ith = movArr.getJSONObject(i);
                                 String title = ith.getString("title");
                                 list = list + title + "\n";
+
                             }
                         } catch (JSONException e) {
                             Log.i("HELLO", "JSON PARSE ERROR");
@@ -75,6 +86,5 @@ public class NewMovies extends AppCompatActivity {
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
-
 
 }

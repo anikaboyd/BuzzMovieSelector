@@ -56,4 +56,9 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, NewMovies.class);
         startActivity(intent);
     }
+
+    public void search(View view) {
+        Intent intent = new Intent(this, MovieSearch.class);
+        startActivity(intent);
+    }
 }
