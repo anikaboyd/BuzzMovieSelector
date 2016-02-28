@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,72 +11,104 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <TextView
         android:paddingTop="60dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First Name"
-        android:id="@+id/FirstName" />
+        android:id="@+id/FirstName"
+        android:textSize="12sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/firstname"
         android:layout_marginBottom="10dp"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:textSize="12sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Last Name"
-        android:id="@+id/LastName" />
+        android:id="@+id/LastName"
+        android:textSize="12sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:id="@+id/Email"
+        android:textSize="12sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lastname"
         android:layout_marginBottom="10dp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="12sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User Name"
-        android:id="@+id/Username" />
+        android:id="@+id/Username"
+        android:textSize="12sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username"
         android:layout_marginBottom="10dp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="12sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
-        android:id="@+id/Password" />
+        android:id="@+id/Password"
+        android:textSize="12sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/password"
         android:layout_marginBottom="10dp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="12sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Verify Password"
-        android:id="@+id/VerifyPassword" />
+        android:id="@+id/VerifyPassword"
+        android:textSize="12sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/verifypassword"
         android:layout_marginBottom="10dp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="12sp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -82,6 +116,9 @@
         android:text="Register"
         android:id="@+id/register"
         android:onClick="onClick" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
+
 
