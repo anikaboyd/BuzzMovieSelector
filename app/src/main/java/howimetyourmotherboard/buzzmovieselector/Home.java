@@ -47,8 +47,13 @@ public class Home extends AppCompatActivity {
     }
 
 
-    public void newRelease(View view) {
+    public void newDVDs(View view) {
         Intent intent = new Intent(this, NewReleases.class);
+        startActivity(intent);
+    }
+
+    public void newMovies(View view) {
+        Intent intent = new Intent(this, NewMovies.class);
         startActivity(intent);
     }
 }
