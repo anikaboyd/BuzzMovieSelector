@@ -42,6 +42,29 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="howimetyourmotherboard.buzzmovieselector.Home" />
         </activity>
+        <activity
+            android:name=".NewReleases"
+            android:label="@string/title_activity_new_releases"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="howimetyourmotherboard.buzzmovieselector.Home" />
+        </activity>
+        <activity
+            android:name=".NewMovies"
+            android:label="@string/title_activity_new_movies"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MovieSearch"
+            android:label="@string/title_activity_movie_search"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="howimetyourmotherboard.buzzmovieselector.Home" />
+        </activity>
     </application>
 
 </manifest>
