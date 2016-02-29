@@ -38,7 +38,11 @@ public class NewMovies extends AppCompatActivity {
         newMovies(this);
     }
 
-
+    /**
+     * Gets the new movies list from Rotten Tomatoes API.
+     *
+     * @param context the context of the activity
+     */
     public void newMovies (final Context context) {
 
         // Instantiate the RequestQueue.

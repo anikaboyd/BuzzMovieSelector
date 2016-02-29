@@ -41,6 +41,13 @@ public class MovieSearch extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Gets the search word that user types in
+     *
+     * @param view the view of activity
+     */
+
     public void search(View view) throws UnsupportedEncodingException{
         movies = (TextView) findViewById(R.id.resultsList);
         search = (EditText) findViewById(R.id.searchMovies);
@@ -49,6 +56,11 @@ public class MovieSearch extends AppCompatActivity {
         searchMovies(this);
     }
 
+    /**
+     * Gets the movie search result list from Rotten Tomatoes API.
+     *
+     * @param context the context of the activity
+     */
     public void searchMovies (final Context context) {
 
         // Instantiate the RequestQueue.

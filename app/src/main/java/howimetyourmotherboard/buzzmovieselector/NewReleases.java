@@ -35,7 +35,11 @@ public class NewReleases extends AppCompatActivity {
         newReleases(this);
     }
 
-
+    /**
+     * Gets the new DVDs list from Rotten Tomatoes API.
+     *
+     * @param context the context of the activity
+     */
     public void newReleases (final Context context) {
 
         // Instantiate the RequestQueue.
