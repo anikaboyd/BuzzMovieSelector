@@ -1,37 +1,31 @@
 package howimetyourmotherboard.buzzmovieselector;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class MovieDetail extends AppCompatActivity {
     Movie currentMovie;
     TextView title, synopsis, cast, rottenRating, myRating;
-    ImageView poster;
-    Bitmap image;
     RatingBar ratingBar;
     User currentUser;
+    HashMap<String,User> comments;
+    LinearLayout movieDetailLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,15 +46,6 @@ public class MovieDetail extends AppCompatActivity {
             currentMovie = NewMovies.currentMovie;
         }
         setTitle(currentMovie.getTitle());
-//        image = getBitmapFromURL(currentMovie.getPosterURL());
- //       poster = (ImageView) findViewById(R.id.movieImage);
-//        poster.setImageBitmap(image);
-
-//        try {
-//            poster.setImageDrawable(loadImage(currentMovie.getPosterURL()));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         title = (TextView) findViewById(R.id.movieTitle);
         String titleYear = currentMovie.getTitle() + " (" + currentMovie.getYear() + ")";
         title.setText(titleYear);
@@ -72,20 +57,36 @@ public class MovieDetail extends AppCompatActivity {
         synopsis.setText(currentMovie.getSynopsis());
         myRating = (TextView) findViewById(R.id.myRating);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        if (currentUser.getRatedMovies().containsKey(currentMovie.getTitle())) {
-            myRating.setText("My Rating: " + String.valueOf(currentUser.getRatedMovies().get(currentMovie.getTitle())));
-            ratingBar.setRating((currentUser.getRatedMovies().get(currentMovie.getTitle())));
+        //Uses movie ID to confirm that this is an already rated movie
+        if (currentUser.getRatedMovies().containsKey(currentMovie.getId())) {
+            Float rating = currentUser.getRatedMovies().get(currentMovie.getId());
+            myRating.setText("My Rating: " + String.valueOf(rating));
+            ratingBar.setRating(rating);
         }
+        //Updates the ratings in Hashmaps when rating is changed
         ratingBar.setOnRatingBarChangeListener(
                 new RatingBar.OnRatingBarChangeListener() {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         myRating.setText("My Rating: " + String.valueOf(rating));
-                        currentUser.rateMovie(currentMovie.getTitle(), rating);
+                        currentUser.rateMovie(currentMovie.getId(), rating);
                     }
                 }
         );
-
+        movieDetailLayout = (LinearLayout) findViewById(R.id.detailLayout);
+        comments = currentMovie.getComments();
+        TextView header = new TextView(this);
+        header.setText("My Comments");
+        header.setTextSize(14);
+        movieDetailLayout.addView(header);
+        //Uses movie ID to confirm that
+        if (currentUser.getComments().containsKey(currentMovie.getId())) {
+            String userComment = currentUser.getComments().get(currentMovie.getId());
+            TextView view = new TextView(this);
+            view.setText(userComment);
+            view.setTextSize(12);
+            movieDetailLayout.addView(view);
+        }
     }
 
     @Override
@@ -99,19 +100,35 @@ public class MovieDetail extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public Bitmap getBitmapFromURL (String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myImage = BitmapFactory.decodeStream(input);
-            return myImage;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    /**
+     * On click method called when user presses the comment button
+     * @param view View of the activity selected
+     */
+    public void comment(View view){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Comment:");
+        final ScrollView commentView = new ScrollView(getApplicationContext());
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setTextSize(14);
+        input.setSingleLine(false);
+        commentView.addView(input);
+        alert.setView(commentView);
 
+        alert.setPositiveButton("Comment", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                currentUser.addComment(currentMovie.getId(),input.getText().toString());
+                currentMovie.addComment(input.getText().toString(), currentUser);
+                recreate();
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+    }
 }

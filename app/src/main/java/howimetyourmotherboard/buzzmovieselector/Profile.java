@@ -78,14 +78,9 @@ public class Profile extends AppCompatActivity {
             currentUser.setMajor(major.getText().toString());
         }
 
-        if (!aboutMe.getText().toString().equals(currentUser.getAboutMe())
-
-    )
-
-    {
+        if (!aboutMe.getText().toString().equals(currentUser.getAboutMe())) {
             currentUser.setAboutMe(aboutMe.getText().toString());
         }
-
         Toast.makeText(getApplicationContext(),
                 "Changes saved.", Toast.LENGTH_SHORT).show();
     }

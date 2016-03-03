@@ -71,6 +71,7 @@ public class NewReleases extends AppCompatActivity {
                                 Movie movie = new Movie();
                                 JSONObject ith = movArr.getJSONObject(i);
                                 //Setting attributes of the movie object
+                                movie.setId(ith.getString("id"));
                                 movie.setTitle(ith.getString("title"));
                                 movie.setYear(ith.getString("year"));
                                 movie.setSynopsis(ith.getString("synopsis"));
@@ -86,7 +87,8 @@ public class NewReleases extends AppCompatActivity {
                                 final TextView view = new TextView(NewReleases.this);
                                 String text = i+1 + ". " + movie.getTitle();
                                 view.setText(text);
-                                view.setId(i+1);
+                                view.setId(Integer.parseInt(movie.getId()));
+                                MainActivity.movieStore.add(movie);
                                 movieIDs.put(view.getId(), movie);
                                 dvdsLayout.addView(view);
                                 view.setOnClickListener(new View.OnClickListener() {

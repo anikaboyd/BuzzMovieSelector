@@ -9,7 +9,8 @@ import java.util.HashMap;
 public class User {
     private String firstName, lastName, username, password, status, email, major, aboutMe;
     private HashMap<String,Float> ratedMovies;
-    private ArrayList<String> comments;
+    private HashMap<String,String> comments;
+
     public User (String firstName, String lastName, String username, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +21,7 @@ public class User {
         major = "";
         aboutMe = "";
         ratedMovies = new HashMap<>();
+        comments = new HashMap<>();
     }
 
     public String getFirstName() {
@@ -86,13 +88,20 @@ public class User {
         return ratedMovies;
     }
 
-    public void rateMovie(String movieName, Float rating) {
-         ratedMovies.put(movieName,rating);
+    public void rateMovie(String movieID, Float rating) {
+         ratedMovies.put(movieID, rating);
     }
 
-    public ArrayList<String> getComments(){ return comments; }
+    public HashMap<String,String> getComments(){ return comments; }
 
-    public void addComment(String comment) {
-        comments.add(comment);
+    public void addComment(String movieID, String comment) {
+        String text = "";
+        if (comments.get(movieID) != null) {
+            text = comments.get(movieID) + this.username + " (" + this.major + ") said: " + comment + " \n";
+
+        } else {
+            text = this.username + " (" + this.major + ") said: " + comment + " \n";
+        }
+        comments.put(movieID, text);
     }
 }

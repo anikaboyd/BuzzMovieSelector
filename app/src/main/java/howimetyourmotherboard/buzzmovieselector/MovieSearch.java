@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,6 +37,7 @@ public class MovieSearch extends AppCompatActivity {
     HashMap<Integer, Movie> movieIDs;
     EditText search;
     String searchWord;
+    User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,7 @@ public class MovieSearch extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        currentUser = MainActivity.getCurrentUser();
         movieSearchLayout= (LinearLayout) findViewById(R.id.movieSearchLayout);
     }
 
@@ -87,6 +90,7 @@ public class MovieSearch extends AppCompatActivity {
                                 Movie movie = new Movie();
                                 JSONObject ith = movArr.getJSONObject(i);
                                 //Setting attributes of the movie object
+                                movie.setId(ith.getString("id"));
                                 movie.setTitle(ith.getString("title"));
                                 movie.setYear(ith.getString("year"));
                                 movie.setSynopsis(ith.getString("synopsis"));
@@ -102,7 +106,8 @@ public class MovieSearch extends AppCompatActivity {
                                 final TextView view = new TextView(MovieSearch.this);
                                 String text = i+1 + ". " + movie.getTitle();
                                 view.setText(text);
-                                view.setId(i+1);
+                                view.setId(Integer.parseInt(movie.getId()));
+                                MainActivity.movieStore.add(movie);
                                 movieIDs.put(view.getId(), movie);
                                 movieSearchLayout.addView(view);
                                 view.setOnClickListener(new View.OnClickListener() {

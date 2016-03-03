@@ -60,7 +60,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Your Rated Movies"
+        android:text="View Your Ratings and Comments"
         android:id="@+id/yourMovies"
         android:onClick="viewMyMovies"
         android:background="#afbae8"

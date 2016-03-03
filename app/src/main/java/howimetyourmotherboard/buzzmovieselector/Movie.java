@@ -5,16 +5,17 @@ import android.text.TextUtils;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by anikaboyd on 2/27/16.
  */
 public class Movie {
-    private String title, year, synopsis, posterURL;
+    private String title, year, synopsis, posterURL, id;
     private int rottenRating;
-    private float myRating;
     private ArrayList<String> cast;
-    private ArrayList<String> comments;
+    private HashMap<String,User> comments = new HashMap<>();
+    String text = "";
 
     public String getTitle() {
         return title;
@@ -50,6 +51,12 @@ public class Movie {
         this.posterURL = posterURL;
     }
 
+    public String getId() { return id; }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public int getRottenRating() {
         return rottenRating;
@@ -59,16 +66,6 @@ public class Movie {
         this.rottenRating = rottenRating;
     }
 
-
-    public float getMyRating() {
-        return myRating;
-    }
-
-    public void setMyRating(float myRating) {
-        this.myRating = myRating;
-    }
-
-
     public String getCast() {
         return TextUtils.join(", ", cast);
     }
@@ -77,10 +74,11 @@ public class Movie {
         this.cast = cast;
     }
 
-    public ArrayList<String> getComments(){ return comments; }
+    public HashMap<String,User>  getComments(){ return comments; }
 
-    public void addComment(String comment) {
-        comments.add(comment);
+    public void addComment(String comment, User user) {
+        text = text + user.getUsername() + " (" + user.getMajor() + ") said: " + comment + " \n";
+        comments.put(text, user);
     }
 
 }
