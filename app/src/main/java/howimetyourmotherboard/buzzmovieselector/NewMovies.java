@@ -1,6 +1,7 @@
 package howimetyourmotherboard.buzzmovieselector;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -22,8 +24,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class NewMovies extends AppCompatActivity {
-    TextView movies;
+    LinearLayout moviesLayout;
+    static Movie currentMovie;
+    HashMap<Integer, Movie> movieIDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +41,15 @@ public class NewMovies extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        movies = (TextView) findViewById(R.id.movieList);
+        moviesLayout = (LinearLayout) findViewById(R.id.moviesLayout);
         newMovies(this);
     }
 
-
+    /**
+     * Gets the new movies list from Rotten Tomatoes API.
+     *
+     * @param context the context of the activity
+     */
     public void newMovies (final Context context) {
 
         // Instantiate the RequestQueue.
@@ -50,26 +61,58 @@ public class NewMovies extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        //Log.i("Response: ", response);
-                        String list = "";
                         try {
+                            movieIDs = new HashMap<>();
                             JSONObject mainObj = new JSONObject(response);
                             JSONArray movArr = mainObj.getJSONArray("movies");
                             for (int i = 0; i < movArr.length(); i++) {
+                                Movie movie = new Movie();
                                 JSONObject ith = movArr.getJSONObject(i);
-                                String title = ith.getString("title");
-                                list = list + title + "\n";
+                                //Setting attributes of the movie object
+                                movie.setId(ith.getString("id"));
+                                movie.setTitle(ith.getString("title"));
+                                movie.setYear(ith.getString("year"));
+                                movie.setSynopsis(ith.getString("synopsis"));
+                                movie.setPosterURL(ith.getJSONObject("posters").getString("thumbnail"));
+                                movie.setRottenRating(ith.getJSONObject("ratings").getInt("critics_score"));
+                                //Making an Array List with cast names
+                                ArrayList<String> cast = new ArrayList<>();
+                                JSONArray castList = ith.getJSONArray("abridged_cast");
+                                for (int j = 0; j < castList.length(); j++) {
+                                    cast.add(castList.getJSONObject(j).getString("name"));
+                                }
+                                movie.setCast(cast);
+                                final TextView view = new TextView(NewMovies.this);
+                                String text = i+1 + ". " + movie.getTitle();
+                                view.setText(text);
+                                view.setId(Integer.parseInt(movie.getId()));
+                                MainActivity.movieStore.add(movie);
+                                movieIDs.put(view.getId(), movie);
+                                moviesLayout.addView(view);
+                                view.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                currentMovie = movieIDs.
+                                                                        get(view.getId());
+                                                                Intent intent = new Intent
+                                                                        (NewMovies.this,
+                                                                                MovieDetail.class);
+                                                                intent.putExtra("from","NewMovies");
+                                                                startActivity(intent);
+                                                            }
+                                                        }
+                                );
                             }
                         } catch (JSONException e) {
                             Log.i("HELLO", "JSON PARSE ERROR");
                         }
-                        movies.setText(list);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                movies.setText("Oops! Something went wrong...");
+                TextView view = new TextView(NewMovies.this);
+                view.setText("Oops! Something went wrong...");
+                moviesLayout.addView(view);
             }
         });
 // Add the request to the RequestQueue.

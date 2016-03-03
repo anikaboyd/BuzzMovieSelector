@@ -28,6 +28,7 @@ import org.json.*;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     private static User currentUser = null;
     HashMap<String,User> userStore = Register.getUserStore();
+    static ArrayList<Movie> movieStore = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

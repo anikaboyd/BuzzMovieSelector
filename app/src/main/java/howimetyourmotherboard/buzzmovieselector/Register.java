@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
     static HashMap<String,User> userStore = new HashMap<>();
-    Collection<User> userList = userStore.values();
     EditText firstName, lastName, username, password, verified, email;
 
     public static HashMap<String,User> getUserStore() {
@@ -33,6 +32,8 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         firstName = (EditText) findViewById(R.id.firstname);
         lastName = (EditText) findViewById(R.id.lastname);
@@ -48,15 +49,15 @@ public class Register extends AppCompatActivity {
                 username.getText().toString(),password.getText().toString(),email.getText().toString());
 
     //can enforce more things later like no blanks, spaces and password requirements
-        if (!(user.password.equals(verified.getText().toString()))) {
+        if (!(user.getPassword().equals(verified.getText().toString()))) {
             Toast.makeText(getApplicationContext(),
                     "Passwords do not match!", Toast.LENGTH_LONG).show();
-        } else if (userStore.containsKey(user.username)) {
+        } else if (userStore.containsKey(user.getUsername())) {
              Toast.makeText(getApplicationContext(),
                     "Username already taken!", Toast.LENGTH_LONG).show();
-        } else if ((user.password.equals(verified.getText().toString())) &&
-                (!userStore.containsKey(user.username)))  {
-            userStore.put(user.username, user);
+        } else if ((user.getPassword().equals(verified.getText().toString())) &&
+                (!userStore.containsKey(user.getUsername())))  {
+            userStore.put(user.getUsername(), user);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
