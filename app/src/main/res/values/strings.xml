@@ -10,4 +10,6 @@
     <string name="title_activity_new_releases">New DVDs</string>
     <string name="title_activity_new_movies">New Movies</string>
     <string name="title_activity_movie_search">Movie Search Results</string>
+    <string name="title_activity_movie_detail">Movie Detail</string>
+    <string name="title_activity_my_movies">My Rated Movies</string>
 </resources>

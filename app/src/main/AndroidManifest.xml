@@ -32,6 +32,7 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Profile"
@@ -59,6 +60,19 @@
         <activity
             android:name=".MovieSearch"
             android:label="@string/title_activity_movie_search"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="howimetyourmotherboard.buzzmovieselector.Home" />
+        </activity>
+        <activity
+            android:name=".MovieDetail"
+            android:label="@string/title_activity_movie_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyMovies"
+            android:label="@string/title_activity_my_movies"
             android:parentActivityName=".Home"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
