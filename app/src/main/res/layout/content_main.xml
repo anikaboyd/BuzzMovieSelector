@@ -27,18 +27,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username" />
+        android:text="Username"
+        android:textSize="12sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username"
         android:layout_marginBottom="10dp"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:textSize="12sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="11sp"
         android:text="Password" />
 
     <EditText
@@ -47,7 +50,8 @@
         android:inputType="textPassword"
         android:id="@+id/password"
         android:layout_marginBottom="10dp"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:textSize="12sp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -66,6 +70,7 @@
         android:layout_gravity="center_horizontal"
         android:onClick="register"
         android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="12sp"/>
 
 </LinearLayout>

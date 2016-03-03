@@ -28,11 +28,10 @@ public class Home extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Typeface type = Typeface.createFromAsset(getAssets(),"Pacifico.ttf");
-        TextView textView = (TextView) findViewById(R.id.question);
-        textView.setTypeface(type);
+        TextView question = (TextView) findViewById(R.id.question);
+        question.setTypeface(type);
 
         user = MainActivity.getCurrentUser();
-        question = (TextView) findViewById(R.id.question);
         question.setText("What would you like to do " + user.getFirstName() + "?");
     }
 
@@ -59,6 +58,11 @@ public class Home extends AppCompatActivity {
 
     public void search(View view) {
         Intent intent = new Intent(this, MovieSearch.class);
+        startActivity(intent);
+    }
+
+    public void viewMyMovies(View view) {
+        Intent intent = new Intent(this, MyMovies.class);
         startActivity(intent);
     }
 }

@@ -30,14 +30,13 @@
         android:id="@+id/search" />
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.67">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/resultsList"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="72dp" />
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/movieSearchLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </LinearLayout>
 </ScrollView>
 
 </LinearLayout>

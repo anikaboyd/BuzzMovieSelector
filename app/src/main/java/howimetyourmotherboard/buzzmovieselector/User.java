@@ -1,10 +1,15 @@
 package howimetyourmotherboard.buzzmovieselector;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by anikaboyd on 2/14/16.
  */
 public class User {
-    String firstName, lastName, username, password, status, email, major, aboutMe;
+    private String firstName, lastName, username, password, status, email, major, aboutMe;
+    private HashMap<String,Float> ratedMovies;
+    private ArrayList<String> comments;
     public User (String firstName, String lastName, String username, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -14,6 +19,7 @@ public class User {
         status  = "Active";
         major = "";
         aboutMe = "";
+        ratedMovies = new HashMap<>();
     }
 
     public String getFirstName() {
@@ -74,5 +80,19 @@ public class User {
 
     public String getAboutMe() {
         return aboutMe;
+    }
+
+    public HashMap<String,Float> getRatedMovies(){
+        return ratedMovies;
+    }
+
+    public void rateMovie(String movieName, Float rating) {
+         ratedMovies.put(movieName,rating);
+    }
+
+    public ArrayList<String> getComments(){ return comments; }
+
+    public void addComment(String comment) {
+        comments.add(comment);
     }
 }
