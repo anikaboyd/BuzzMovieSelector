@@ -1,7 +1,10 @@
 package howimetyourmotherboard.buzzmovieselector;
 
 import android.content.Context;
+<<<<<<< HEAD
+=======
 import android.content.Intent;
+>>>>>>> master
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,10 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+<<<<<<< HEAD
+import android.widget.ScrollView;
+import android.widget.TextView;
+=======
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+>>>>>>> master
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,6 +36,13 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
+<<<<<<< HEAD
+
+public class MovieSearch extends AppCompatActivity {
+    TextView movies;
+    EditText search;
+    String searchWord;
+=======
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,6 +53,7 @@ public class MovieSearch extends AppCompatActivity {
     EditText search;
     String searchWord;
     User currentUser;
+>>>>>>> master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +63,12 @@ public class MovieSearch extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+<<<<<<< HEAD
+    }
+
+    public void search(View view) throws UnsupportedEncodingException{
+        movies = (TextView) findViewById(R.id.resultsList);
+=======
         currentUser = MainActivity.getCurrentUser();
         movieSearchLayout= (LinearLayout) findViewById(R.id.movieSearchLayout);
     }
@@ -60,17 +82,21 @@ public class MovieSearch extends AppCompatActivity {
 
     public void search(View view) throws UnsupportedEncodingException{
         movieSearchLayout.removeAllViewsInLayout();
+>>>>>>> master
         search = (EditText) findViewById(R.id.searchMovies);
         searchWord = search.getText().toString();
         searchWord = URLEncoder.encode(searchWord, "utf-8");
         searchMovies(this);
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Gets the movie search result list from Rotten Tomatoes API.
      *
      * @param context the context of the activity
      */
+>>>>>>> master
     public void searchMovies (final Context context) {
 
         // Instantiate the RequestQueue.
@@ -82,6 +108,19 @@ public class MovieSearch extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+<<<<<<< HEAD
+                        // Display the first 500 characters of the response string.
+                        //Log.i("Response: ", response);
+                        String list = "";
+                        try {
+                            JSONObject mainObj = new JSONObject(response);
+                            JSONArray movArr = mainObj.getJSONArray("movies");
+                            for (int i = 0; i < movArr.length(); i++) {
+                                JSONObject ith = movArr.getJSONObject(i);
+                                String title = ith.getString("title");
+                                list = list + title + "\n";
+
+=======
                         try {
                             movieIDs = new HashMap<>();
                             JSONObject mainObj = new JSONObject(response);
@@ -123,17 +162,26 @@ public class MovieSearch extends AppCompatActivity {
                                                             }
                                                         }
                                 );
+>>>>>>> master
                             }
                         } catch (JSONException e) {
                             Log.i("HELLO", "JSON PARSE ERROR");
                         }
+<<<<<<< HEAD
+                        movies.setText(list);
+=======
+>>>>>>> master
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+<<<<<<< HEAD
+                movies.setText("Oops! Something went wrong...");
+=======
                 TextView view = new TextView(MovieSearch.this);
                 view.setText("Oops! Something went wrong...");
                 movieSearchLayout.addView(view);
+>>>>>>> master
             }
         });
 // Add the request to the RequestQueue.

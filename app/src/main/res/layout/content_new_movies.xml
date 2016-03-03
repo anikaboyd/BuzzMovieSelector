@@ -12,6 +12,23 @@
     tools:context="howimetyourmotherboard.buzzmovieselector.NewMovies"
     tools:showIn="@layout/activity_new_movies">
 
+<<<<<<< HEAD
+
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:fillViewport="false"
+        android:id="@+id/svnewmovies">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/movieList" />
+=======
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </LinearLayout>
+>>>>>>> master
     </ScrollView>
 
 </LinearLayout>

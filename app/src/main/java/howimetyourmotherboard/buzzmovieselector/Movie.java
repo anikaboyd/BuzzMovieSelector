@@ -1,5 +1,7 @@
 package howimetyourmotherboard.buzzmovieselector;
 
+<<<<<<< HEAD
+=======
 import android.text.TextUtils;
 
 import com.android.volley.toolbox.StringRequest;
@@ -7,15 +9,24 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+>>>>>>> master
 /**
  * Created by anikaboyd on 2/27/16.
  */
 public class Movie {
+<<<<<<< HEAD
+    String title;
+
+    public Movie (String title) {
+        this.title = title;
+    }
+=======
     private String title, year, synopsis, posterURL, id;
     private int rottenRating;
     private ArrayList<String> cast;
     private HashMap<String,User> comments = new HashMap<>();
     String text = "";
+>>>>>>> master
 
     public String getTitle() {
         return title;
@@ -24,6 +35,8 @@ public class Movie {
     public void setTitle(String title) {
         this.title = title;
     }
+<<<<<<< HEAD
+=======
 
     public String getYear() {
         return year;
@@ -81,4 +94,5 @@ public class Movie {
         comments.put(text, user);
     }
 
+>>>>>>> master
 }

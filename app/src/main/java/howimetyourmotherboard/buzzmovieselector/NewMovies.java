@@ -1,7 +1,10 @@
 package howimetyourmotherboard.buzzmovieselector;
 
 import android.content.Context;
+<<<<<<< HEAD
+=======
 import android.content.Intent;
+>>>>>>> master
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,7 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+<<<<<<< HEAD
+=======
 import android.widget.LinearLayout;
+>>>>>>> master
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -24,6 +30,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+<<<<<<< HEAD
+public class NewMovies extends AppCompatActivity {
+    TextView movies;
+=======
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,6 +41,7 @@ public class NewMovies extends AppCompatActivity {
     LinearLayout moviesLayout;
     static Movie currentMovie;
     HashMap<Integer, Movie> movieIDs;
+>>>>>>> master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,13 @@ public class NewMovies extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+<<<<<<< HEAD
+        movies = (TextView) findViewById(R.id.movieList);
+        newMovies(this);
+    }
+
+
+=======
         moviesLayout = (LinearLayout) findViewById(R.id.moviesLayout);
         newMovies(this);
     }
@@ -50,6 +68,7 @@ public class NewMovies extends AppCompatActivity {
      *
      * @param context the context of the activity
      */
+>>>>>>> master
     public void newMovies (final Context context) {
 
         // Instantiate the RequestQueue.
@@ -61,6 +80,18 @@ public class NewMovies extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+<<<<<<< HEAD
+                        // Display the first 500 characters of the response string.
+                        //Log.i("Response: ", response);
+                        String list = "";
+                        try {
+                            JSONObject mainObj = new JSONObject(response);
+                            JSONArray movArr = mainObj.getJSONArray("movies");
+                            for (int i = 0; i < movArr.length(); i++) {
+                                JSONObject ith = movArr.getJSONObject(i);
+                                String title = ith.getString("title");
+                                list = list + title + "\n";
+=======
                         try {
                             movieIDs = new HashMap<>();
                             JSONObject mainObj = new JSONObject(response);
@@ -102,17 +133,26 @@ public class NewMovies extends AppCompatActivity {
                                                             }
                                                         }
                                 );
+>>>>>>> master
                             }
                         } catch (JSONException e) {
                             Log.i("HELLO", "JSON PARSE ERROR");
                         }
+<<<<<<< HEAD
+                        movies.setText(list);
+=======
+>>>>>>> master
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+<<<<<<< HEAD
+                movies.setText("Oops! Something went wrong...");
+=======
                 TextView view = new TextView(NewMovies.this);
                 view.setText("Oops! Something went wrong...");
                 moviesLayout.addView(view);
+>>>>>>> master
             }
         });
 // Add the request to the RequestQueue.
