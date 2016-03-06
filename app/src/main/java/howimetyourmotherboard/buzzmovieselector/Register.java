@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
     static HashMap<String,User> userStore = new HashMap<>();
-    Collection<User> userList = userStore.values();
     EditText firstName, lastName, username, password, verified, email;
 
     public static HashMap<String,User> getUserStore() {
