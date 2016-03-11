@@ -79,6 +79,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="howimetyourmotherboard.buzzmovieselector.Home" />
         </activity>
+        <activity
+            android:name=".Recommendations"
+            android:label="@string/title_activity_recommendations"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="howimetyourmotherboard.buzzmovieselector.Home" />
+        </activity>
     </application>
 
 </manifest>

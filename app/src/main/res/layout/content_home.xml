@@ -98,6 +98,19 @@
         android:layout_column="0" />
 
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Recommendations"
+        android:onClick="myRecs"
+        android:id="@+id/myRecommendations"
+        android:background="#afbae8"
+        android:layout_below="@+id/searchMovies"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/question"
+        android:layout_row="6"
+        android:layout_column="0" />
+
+    <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,6 +124,5 @@
         android:layout_gravity="right"
         android:layout_row="0"
         android:layout_column="0" />
-
 
 </TableLayout>
