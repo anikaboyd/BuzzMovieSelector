@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="howimetyourmotherboard.buzzmovieselector.Recommendations"
+    tools:showIn="@layout/activity_recommendations">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:text="Click the relevant checkboxes to filter your recommendations. You may only filter by one category at a time."
+        android:id="@+id/textView2" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recency"
+        android:id="@+id/checkBoxRecency"
+        android:layout_marginEnd="74dp"
+        android:layout_marginTop="41dp"
+        android:checked="false"
+        android:layout_below="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBoxRating"
+        android:layout_gravity="right"
+        android:layout_marginRight="26dp"
+        android:layout_below="@+id/checkBoxRecency"
+        android:layout_alignStart="@+id/checkBoxRecency"
+        android:checked="false"
+        android:text="Rating" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genre"
+        android:id="@+id/checkBoxGenre"
+        android:layout_marginRight="26dp"
+        android:checked="false"
+        android:layout_alignTop="@+id/checkBoxRating"
+        android:layout_alignStart="@+id/checkBoxMajor" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Major"
+        android:id="@+id/checkBoxMajor"
+        android:layout_gravity="right"
+        android:layout_marginRight="26dp"
+        android:checked="false"
+        android:layout_alignTop="@+id/checkBoxRecency"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="49dp" />
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/button2"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+        android:id="@+id/recsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+    </ScrollView>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:id="@+id/button2"
+        android:onClick="filter"
+        android:layout_below="@+id/checkBoxGenre"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp"
+        android:layout_alignEnd="@+id/sv" />
+</RelativeLayout>

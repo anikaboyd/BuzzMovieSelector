@@ -6,7 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +19,8 @@ import java.util.Iterator;
 public class Profile extends AppCompatActivity {
     HashMap<String, User> userStore;
     User currentUser;
-    EditText firstName, lastName, username, password, email, major, aboutMe;
+    EditText firstName, lastName, username, password, email, aboutMe;
+    Spinner major;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,16 @@ public class Profile extends AppCompatActivity {
         password.setText(currentUser.getPassword());
         email = (EditText) findViewById(R.id.email);
         email.setText(currentUser.getEmail());
-        major = (EditText) findViewById(R.id.major);
-        major.setText(currentUser.getMajor());
+        String[] items = new String[]{"Computer Science", "Computational Media", "Engineering",
+                "Architecture", "Business", "Liberal Arts", "Sciences"};
+        major = (Spinner) findViewById(R.id.major);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        major.setAdapter(adapter);
+        //Setting value of spinner
+        String myString = currentUser.getMajor();
+        ArrayAdapter myAdap = (ArrayAdapter) major.getAdapter();
+        int spinnerPosition = myAdap.getPosition(myString);
+        major.setSelection(spinnerPosition);
         aboutMe = (EditText) findViewById(R.id.aboutme);
 
     }
@@ -74,8 +85,8 @@ public class Profile extends AppCompatActivity {
             currentUser.setEmail(email.getText().toString());
         }
 
-        if (!major.getText().toString().equals(currentUser.getMajor())) {
-            currentUser.setMajor(major.getText().toString());
+        if (!major.getSelectedItem().toString().equals(currentUser.getMajor())) {
+            currentUser.setMajor(major.getSelectedItem().toString());
         }
 
         if (!aboutMe.getText().toString().equals(currentUser.getAboutMe())) {

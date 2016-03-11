@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -70,6 +71,7 @@ public class MovieDetail extends AppCompatActivity {
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         myRating.setText("My Rating: " + String.valueOf(rating));
                         currentUser.rateMovie(currentMovie.getId(), rating);
+                        currentMovie.setRatings(currentUser, rating);
                     }
                 }
         );
@@ -79,7 +81,7 @@ public class MovieDetail extends AppCompatActivity {
         header.setText("My Comments");
         header.setTextSize(14);
         movieDetailLayout.addView(header);
-        //Uses movie ID to confirm that
+
         if (currentUser.getComments().containsKey(currentMovie.getId())) {
             String userComment = currentUser.getComments().get(currentMovie.getId());
             TextView view = new TextView(this);

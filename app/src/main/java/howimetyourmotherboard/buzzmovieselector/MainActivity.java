@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String,User> userStore = Register.getUserStore();
     static ArrayList<Movie> movieStore = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     public static User getCurrentUser() {
         return currentUser;
     }
-    public void onClick(View v) {
+    public void onClick(View view) {
         String name = username.getText().toString();
         String pass = password.getText().toString();
 

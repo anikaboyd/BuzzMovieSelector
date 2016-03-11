@@ -107,7 +107,16 @@ public class MovieSearch extends AppCompatActivity {
                                 String text = i+1 + ". " + movie.getTitle();
                                 view.setText(text);
                                 view.setId(Integer.parseInt(movie.getId()));
-                                MainActivity.movieStore.add(movie);
+                                boolean exists = false;
+                                for (Movie film: MainActivity.movieStore) {
+                                    if (film.getId().equals(movie.getId())) {
+                                        exists = true;
+                                        movie = film;
+                                    }
+                                }
+                                if (!exists) {
+                                    MainActivity.movieStore.add(movie);
+                                }
                                 movieIDs.put(view.getId(), movie);
                                 movieSearchLayout.addView(view);
                                 view.setOnClickListener(new View.OnClickListener() {
