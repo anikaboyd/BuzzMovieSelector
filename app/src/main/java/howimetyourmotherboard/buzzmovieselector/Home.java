@@ -28,7 +28,7 @@ public class Home extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Typeface type = Typeface.createFromAsset(getAssets(),"Pacifico.ttf");
-        TextView question = (TextView) findViewById(R.id.question);
+        question = (TextView) findViewById(R.id.question);
         question.setTypeface(type);
 
         user = MainActivity.getCurrentUser();
@@ -63,6 +63,11 @@ public class Home extends AppCompatActivity {
 
     public void viewMyMovies(View view) {
         Intent intent = new Intent(this, MyMovies.class);
+        startActivity(intent);
+    }
+
+    public void myRecs(View view) {
+        Intent intent = new Intent(this, Recommendations.class);
         startActivity(intent);
     }
 }

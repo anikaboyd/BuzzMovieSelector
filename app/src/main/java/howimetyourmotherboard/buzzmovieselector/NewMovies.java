@@ -86,7 +86,16 @@ public class NewMovies extends AppCompatActivity {
                                 String text = i+1 + ". " + movie.getTitle();
                                 view.setText(text);
                                 view.setId(Integer.parseInt(movie.getId()));
-                                MainActivity.movieStore.add(movie);
+                                boolean exists = false;
+                                for (Movie film: MainActivity.movieStore) {
+                                    if (film.getId().equals(movie.getId())) {
+                                        exists = true;
+                                        movie = film;
+                                    }
+                                }
+                                if (!exists) {
+                                    MainActivity.movieStore.add(movie);
+                                }
                                 movieIDs.put(view.getId(), movie);
                                 moviesLayout.addView(view);
                                 view.setOnClickListener(new View.OnClickListener() {

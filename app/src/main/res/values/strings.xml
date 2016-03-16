@@ -12,4 +12,5 @@
     <string name="title_activity_movie_search">Movie Search Results</string>
     <string name="title_activity_movie_detail">Movie Detail</string>
     <string name="title_activity_my_movies">My Ratings and Comments</string>
+    <string name="title_activity_recommendations">Recommendations</string>
 </resources>
