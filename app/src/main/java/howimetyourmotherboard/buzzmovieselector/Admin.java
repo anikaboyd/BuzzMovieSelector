@@ -1,5 +1,7 @@
 package howimetyourmotherboard.buzzmovieselector;
 
+import java.util.ArrayList;
+
 /**
  * Created by kathy on 3/31/16.
  */
