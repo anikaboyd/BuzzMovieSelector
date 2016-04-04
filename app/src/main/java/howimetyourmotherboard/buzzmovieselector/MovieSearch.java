@@ -3,17 +3,13 @@ package howimetyourmotherboard.buzzmovieselector;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,18 +22,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MovieSearch extends AppCompatActivity {
-    LinearLayout movieSearchLayout;
+    private LinearLayout movieSearchLayout;
+    private HashMap<Integer, Movie> movieIDs;
+    private EditText search;
+    private String searchWord;
     static Movie currentMovie;
-    HashMap<Integer, Movie> movieIDs;
-    EditText search;
-    String searchWord;
-    User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +43,6 @@ public class MovieSearch extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        currentUser = MainActivity.getCurrentUser();
         movieSearchLayout= (LinearLayout) findViewById(R.id.movieSearchLayout);
     }
 
