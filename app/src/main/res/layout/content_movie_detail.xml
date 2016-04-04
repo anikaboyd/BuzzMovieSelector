@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="howimetyourmotherboard.buzzmovieselector.MovieDetail"
-    tools:showIn="@layout/activity_movie_detail">
+    tools:showIn="@layout/activity_movie_detail"
+    android:background="#fdf5d4">
     <!--<ImageView-->
         <!--android:id="@+id/movieImage"-->
         <!--android:layout_width="wrap_content"-->

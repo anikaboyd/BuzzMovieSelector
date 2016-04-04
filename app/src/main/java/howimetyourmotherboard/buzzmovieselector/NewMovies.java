@@ -3,14 +3,11 @@ package howimetyourmotherboard.buzzmovieselector;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -28,9 +25,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NewMovies extends AppCompatActivity {
-    LinearLayout moviesLayout;
+    private LinearLayout moviesLayout;
+    private HashMap<Integer, Movie> movieIDs;
     static Movie currentMovie;
-    HashMap<Integer, Movie> movieIDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
