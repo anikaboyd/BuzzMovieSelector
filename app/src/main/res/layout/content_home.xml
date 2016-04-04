@@ -100,7 +100,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:text="Ask for Recommendations"
         android:id="@+id/recommend"
         android:background="#afbae8"
@@ -110,7 +109,6 @@
         android:layout_row="6"
         android:layout_column="0"
         />
-=======
         android:text="Get Recommendations"
         android:onClick="myRecs"
         android:id="@+id/myRecommendations"
