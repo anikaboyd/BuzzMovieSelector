@@ -13,15 +13,10 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
-    static HashMap<String,User> userStore = new HashMap<>();
-    EditText firstName, lastName, username, password, verified, email;
-
+    private EditText firstName, lastName, username, password, verified, email;
     private DatabaseHelper myDb;
     private SQLiteDatabase readableDb;
 
-    public static HashMap<String,User> getUserStore() {
-        return userStore;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +51,6 @@ public class Register extends AppCompatActivity {
                     "Username already taken!", Toast.LENGTH_LONG).show();
         } else if ((user.getPassword().equals(verified.getText().toString())) &&
                 (!exists(user.getUsername()))) {
-            userStore.put(user.getUsername(), user);
             myDb.insert(user.getFirstName(), user.getLastName(), user.getUsername(),
                     user.getPassword(), user.getStatus(), user.getEmail(), user.getMajor(),
                     user.getAboutMe());

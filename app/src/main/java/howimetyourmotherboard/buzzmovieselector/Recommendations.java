@@ -20,24 +20,25 @@ import java.util.List;
 import java.util.Map;
 
 public class Recommendations extends AppCompatActivity {
-    LinearLayout recsLayout;
-    HashMap<Movie,Float> avgRatings;
-    HashMap<Movie,Float> cSRatings;
-    HashMap<Movie,Float> cmRatings;
-    HashMap<Movie,Float> artRatings;
-    HashMap<Movie,Float> archRatings;
-    HashMap<Movie,Float> sciRatings;
-    HashMap<Movie,Float> engineerRatings;
-    HashMap<Movie,Float> bizRatings;
-    Map<Movie,Float> cSRatingsSorted;
-    Map<Movie,Float> cmRatingsSorted;
-    Map<Movie,Float> artRatingsSorted;
-    Map<Movie,Float> archRatingsSorted;
-    Map<Movie,Float> sciRatingsSorted;
-    Map<Movie,Float> engineerRatingsSorted;
-    Map<Movie,Float> bizRatingsSorted;
-    Map<Movie,Float> hiToLoRatings;
-    CheckBox major, recency, genre, rating;
+    private LinearLayout recsLayout;
+    private HashMap<Movie,Float> avgRatings;
+    private HashMap<Movie,Float> cSRatings;
+    private HashMap<Movie,Float> cmRatings;
+    private HashMap<Movie,Float> artRatings;
+    private HashMap<Movie,Float> archRatings;
+    private HashMap<Movie,Float> sciRatings;
+    private HashMap<Movie,Float> engineerRatings;
+    private HashMap<Movie,Float> bizRatings;
+    private Map<Movie,Float> cSRatingsSorted;
+    private Map<Movie,Float> cmRatingsSorted;
+    private Map<Movie,Float> artRatingsSorted;
+    private Map<Movie,Float> archRatingsSorted;
+    private Map<Movie,Float> sciRatingsSorted;
+    private Map<Movie,Float> engineerRatingsSorted;
+    private Map<Movie,Float> bizRatingsSorted;
+    private Map<Movie,Float> hiToLoRatings;
+    private CheckBox major, recency, genre, rating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

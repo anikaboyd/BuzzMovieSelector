@@ -28,12 +28,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MovieSearch extends AppCompatActivity {
-    LinearLayout movieSearchLayout;
+    private LinearLayout movieSearchLayout;
+    private HashMap<Integer, Movie> movieIDs;
+    private EditText search;
+    private String searchWord;
     static Movie currentMovie;
-    HashMap<Integer, Movie> movieIDs;
-    EditText search;
-    String searchWord;
-    User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,6 @@ public class MovieSearch extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        currentUser = MainActivity.getCurrentUser();
         movieSearchLayout= (LinearLayout) findViewById(R.id.movieSearchLayout);
     }
 

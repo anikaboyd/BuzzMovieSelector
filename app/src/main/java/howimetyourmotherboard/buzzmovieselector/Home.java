@@ -9,8 +9,9 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Home extends AppCompatActivity {
-    User user;
-    TextView question;
+
+    private TextView question;
+    static User currentUser = MainActivity.currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +25,7 @@ public class Home extends AppCompatActivity {
         Typeface type = Typeface.createFromAsset(getAssets(),"Pacifico.ttf");
         question = (TextView) findViewById(R.id.question);
         question.setTypeface(type);
-
-        user = MainActivity.getCurrentUser();
-        //edit!
-        question.setText("What would you like to do?");
+        question.setText("What would you like to do " + currentUser.getFirstName() + "?");
     }
 
     public void logout (View view) {

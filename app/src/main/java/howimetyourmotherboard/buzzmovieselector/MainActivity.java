@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    EditText username;
-    EditText password;
-    private static User currentUser = null;
-    HashMap<String,User> userStore = Register.getUserStore();
+    private EditText username;
+    private EditText password;
     static ArrayList<Movie> movieStore = new ArrayList<>();
+    static User currentUser;
+
 
     private DatabaseHelper myDb;
     private SQLiteDatabase readableDb;
@@ -69,34 +69,43 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static User getCurrentUser() {
-        return currentUser;
-    }
-
     public void onClick(View view) {
         String name = username.getText().toString();
         String pass = password.getText().toString();
+        String dbFName = "";
+        String dbLName = "";
         String dbName = "";
         String dbPass = "";
+        String dbStatus = "";
+        String dbEmail = "";
+        String dbMajor = "";
+        String dbAboutMe = "";
 
         if (exists(name)) {
             Cursor cursor = getData(name);
             if (cursor.moveToFirst()){
                 while(!cursor.isAfterLast()){
-                    dbName = cursor.getString(cursor.getColumnIndex(Database.USERNAME));
-                    dbPass = cursor.getString(cursor.getColumnIndex(Database.PASSWORD));
+                    dbFName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIRST_NAME));
+                    dbLName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.LAST_NAME));
+                    dbName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USERNAME));
+                    dbPass = cursor.getString(cursor.getColumnIndex(DatabaseHelper.PASSWORD));
+                    dbStatus = cursor.getString(cursor.getColumnIndex(DatabaseHelper.STATUS));
+                    dbEmail = cursor.getString(cursor.getColumnIndex(DatabaseHelper.EMAIL));
+                    dbMajor = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MAJOR));
+                    dbAboutMe = cursor.getString(cursor.getColumnIndex(DatabaseHelper.ABOUT_ME)) ;
                     cursor.moveToNext();
                 }
             }
-            cursor.close();
             if ((dbName.equals(name)) && (dbPass.equals(pass))) {
-                currentUser = userStore.get(name);
+                currentUser = new User(dbFName,dbLName,dbName,dbPass, dbStatus, dbEmail, dbMajor,
+                        dbAboutMe);
                 Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(),
                         "Username or password is incorrect.", Toast.LENGTH_LONG).show();
             }
+            cursor.close();
         }
     }
 

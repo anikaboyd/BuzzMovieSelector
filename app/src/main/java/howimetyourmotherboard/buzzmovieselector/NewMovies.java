@@ -25,9 +25,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NewMovies extends AppCompatActivity {
-    LinearLayout moviesLayout;
+    private LinearLayout moviesLayout;
+    private HashMap<Integer, Movie> movieIDs;
     static Movie currentMovie;
-    HashMap<Integer, Movie> movieIDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

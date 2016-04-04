@@ -18,12 +18,12 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 public class MovieDetail extends AppCompatActivity {
-    Movie currentMovie;
-    TextView title, synopsis, cast, rottenRating, myRating;
-    RatingBar ratingBar;
-    User currentUser;
-    HashMap<String,User> comments;
-    LinearLayout movieDetailLayout;
+    private TextView title, synopsis, cast, rottenRating, myRating;
+    private RatingBar ratingBar;
+    private HashMap<String,User> comments;
+    private LinearLayout movieDetailLayout;
+    static Movie currentMovie;
+    static User currentUser = MainActivity.currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,6 @@ public class MovieDetail extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        currentUser = MainActivity.getCurrentUser();
         Intent callingActivity = getIntent();
         if (callingActivity.getStringExtra("from").equals("NewReleases")) {
             currentMovie = NewReleases.currentMovie;

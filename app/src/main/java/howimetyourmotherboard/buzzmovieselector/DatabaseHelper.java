@@ -52,8 +52,21 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
         contentValues.put(EMAIL, email);
         contentValues.put(MAJOR, major);
         contentValues.put(ABOUT_ME, aboutMe);
-        Log.d("Statement: ", DATABASE_CREATE);
         mysqldb.insert("User_List", null, contentValues);
         return true;
+    }
+
+    public void updateInfo(String firstName, String lastName, String password,
+                           String status, String email, String major, String aboutMe) {
+        SQLiteDatabase mysqldb = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FIRST_NAME, firstName);
+        contentValues.put(LAST_NAME, lastName);
+        contentValues.put(PASSWORD, password);
+        contentValues.put(STATUS, status);
+        contentValues.put(EMAIL, email);
+        contentValues.put(MAJOR, major);
+        contentValues.put(ABOUT_ME, aboutMe);
+        mysqldb.update("User_List", contentValues, "Username = " + USERNAME, null);
     }
 }
