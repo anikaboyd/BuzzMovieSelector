@@ -3,7 +3,6 @@ package howimetyourmotherboard.buzzmovieselector;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,10 +10,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class MyMovies extends AppCompatActivity {
-    User currentUser;
-    HashMap<String,Float> ratedMovies;
-    HashMap<String,String> comment;
-    LinearLayout myMoviesLayout;
+    private HashMap<String,Float> ratedMovies;
+    private HashMap<String,String> comment;
+    private LinearLayout myMoviesLayout;
+    static User currentUser = MainActivity.currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,6 @@ public class MyMovies extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         myMoviesLayout = (LinearLayout) findViewById(R.id.myMoviesLayout);
-        currentUser = MainActivity.getCurrentUser();
         ratedMovies = currentUser.getRatedMovies();
         comment = currentUser.getComments();
         TextView header1 = new TextView(this);

@@ -11,7 +11,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="howimetyourmotherboard.buzzmovieselector.NewReleases"
-    tools:showIn="@layout/activity_new_releases">
+    tools:showIn="@layout/activity_new_releases"
+    android:background="#fdf5d4">
 
     <ScrollView
         android:layout_width="match_parent"

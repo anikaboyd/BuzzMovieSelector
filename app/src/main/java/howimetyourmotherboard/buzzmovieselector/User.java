@@ -1,6 +1,5 @@
 package howimetyourmotherboard.buzzmovieselector;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,8 +17,22 @@ public class User {
         this.password = password;
         this.email = email;
         status  = "Active";
-        major = "";
-        aboutMe = "";
+        major = "Not Yet Set";
+        aboutMe = "Tell us something about yourself...";
+        ratedMovies = new HashMap<>();
+        comments = new HashMap<>();
+    }
+
+    public User (String firstName, String lastName, String username, String password,
+                 String status, String email, String major, String aboutMe) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.status  = status;
+        this.major = major;
+        this.aboutMe = aboutMe;
         ratedMovies = new HashMap<>();
         comments = new HashMap<>();
     }
