@@ -24,10 +24,6 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String,User> userStore = Register.getUserStore();
     static ArrayList<Movie> movieStore = new ArrayList<>();
 
-    Database dbHelp;
-    SQLiteDatabase sqldb;
-    UserStore users;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-
-        dbHelp = new Database(this, Database.DATABASE_NAME);
-        sqldb = dbHelp.getReadableDatabase();
-        users = new UserStore(dbHelp, sqldb);
     }
 
     @Override
@@ -74,14 +66,17 @@ public class MainActivity extends AppCompatActivity {
     public static User getCurrentUser() {
         return currentUser;
     }
+
     public void onClick(View view) {
         String name = username.getText().toString();
         String pass = password.getText().toString();
-        User userMatch = users.findUser(name);
 
-        if (userMatch != null) {
-            if (userMatch.getPassword().equals(pass)) {
-                currentUser = userStore.get(name);
+        if (Register.exists(name)) {
+            Cursor cursor = Register.getData(name);
+            String dbName = cursor.getString(cursor.getColumnIndex(Database.USERNAME));
+            String dbPass = cursor.getString(cursor.getColumnIndex(Database.PASSWORD));
+            if ((dbName.equals(name)) && (dbPass.equals(pass))) {
+                currentUser = userStore.get(dbName);
                 Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
             } else {
@@ -91,22 +86,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-//        if ((userStore.containsKey(name)) && userStore.get(name).getPassword().equals(pass)) {
-//            currentUser = userStore.get(name);
-//            Intent intent = new Intent(this,Home.class);
-//            startActivity(intent);
-//        } else {
-//            Toast.makeText(getApplicationContext(),
-//                    "Username or password is incorrect.",Toast.LENGTH_LONG).show();
-//        }
-//    }
-
     public void register (View view) {
         Intent intent = new Intent(this,Register.class);
         startActivity(intent);
     }
 
 }
+
