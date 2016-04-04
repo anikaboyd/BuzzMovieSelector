@@ -2,12 +2,9 @@ package howimetyourmotherboard.buzzmovieselector;
 
 import android.text.TextUtils;
 
-import com.android.volley.toolbox.StringRequest;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Created by anikaboyd on 2/27/16.
