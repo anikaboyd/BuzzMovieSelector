@@ -1,5 +1,6 @@
 package howimetyourmotherboard.buzzmovieselector;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -48,6 +49,15 @@ public class Database extends SQLiteOpenHelper {
      */
     public static final String EMAIL = "Email";
 
+    /**
+     * User database column name
+     */
+    public static final String STATUS = "Status";
+
+    /**
+     * User database column name
+     */
+    public static final String ABOUTME = "AboutMe";
 
     /**
      * User database column name
@@ -73,6 +83,7 @@ public class Database extends SQLiteOpenHelper {
      * Movie database column name
      */
     public static final String MOVIENAME = "Name";
+
 
     /**
      * Movie database column name
@@ -117,11 +128,27 @@ public class Database extends SQLiteOpenHelper {
 
 
 
-    private static final String USER_DB_CREATE = "CREATE TABLE "
-            + USER + " (" + USERNAME + "text not null," + PASSWORD + "text not null,"
-            + EMAIL + "text not null," + FIRSTNAME + "text not null," + LASTNAME + "text not null,"
-            + MAJOR + "text not null," + INTEREST + " text not null)";
+    /**
+     * Database creation for Users.db
+     */
+    static final String USER_DB_CREATE = "CREATE TABLE "
+            + USER + " (" + FIRSTNAME + "text not null," + LASTNAME + "text not null,"
+            + USERNAME + "text not null," + PASSWORD + "text not null," + STATUS + "text not null," +
+            EMAIL + "text not null," + MAJOR + "text not null," + ABOUTME + " text not null)";
 
+
+    public boolean insert(String firstName, String lastName, String username, String password, String email) {
+        SQLiteDatabase mysqldb = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("first name", firstName);
+        contentValues.put("last name", lastName);
+        contentValues.put("user name", username);
+        contentValues.put("password", password);
+        contentValues.put("email", email);
+        mysqldb.insert("users", null, contentValues);
+        return true;
+
+    }
 
     private static final String MOVIE_DB_CREATE
             = "CREATE TABLE " + MOVIE + " (" + MOVIENAME
@@ -140,5 +167,11 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + USER);
+        db.execSQL("DROP TABLE IF EXISTS " + MOVIE);
+        onCreate(db);
     }
 }
+
+
+
