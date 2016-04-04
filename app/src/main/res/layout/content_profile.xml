@@ -49,7 +49,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/email"
+            android:id="@+id/lastname"
             android:layout_marginBottom="10dp"
             android:singleLine="true"
             android:textSize="12sp"/>
@@ -64,7 +64,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lastname"
+            android:id="@+id/email"
             android:layout_marginBottom="10dp"
             android:singleLine="true"
             android:textSize="12sp"/>

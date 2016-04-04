@@ -1,6 +1,5 @@
 package howimetyourmotherboard.buzzmovieselector;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,8 +17,8 @@ public class User {
         this.password = password;
         this.email = email;
         status  = "Active";
-        major = "";
-        aboutMe = "";
+        major = "Not Yet Set";
+        aboutMe = "Tell us something about yourself...";
         ratedMovies = new HashMap<>();
         comments = new HashMap<>();
     }
