@@ -139,6 +139,6 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(MOVIE_DB_CREATE);
     }
 
-    public void onUpgrade(SQLiteDatabase db, int num, int num2) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 }
