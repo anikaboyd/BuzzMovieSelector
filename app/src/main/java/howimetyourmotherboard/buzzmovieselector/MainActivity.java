@@ -7,6 +7,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+<<<<<<< HEAD
+=======
+import android.util.Log;
+>>>>>>> master
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +22,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    EditText username;
-    EditText password;
-    private static User currentUser = null;
-    HashMap<String,User> userStore = Register.getUserStore();
+    private EditText username;
+    private EditText password;
     static ArrayList<Movie> movieStore = new ArrayList<>();
+    static User currentUser;
 
+
+    private DatabaseHelper myDb;
+    private SQLiteDatabase readableDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+<<<<<<< HEAD
+=======
+
+        myDb = new DatabaseHelper(this);
+        readableDb = myDb.getReadableDatabase();
+>>>>>>> master
     }
 
     @Override
@@ -63,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+<<<<<<< HEAD
     public static User getCurrentUser() {
         return currentUser;
     }
@@ -77,12 +90,48 @@ public class MainActivity extends AppCompatActivity {
             String dbPass = cursor.getString(cursor.getColumnIndex(Database.PASSWORD));
             if ((dbName.equals(name)) && (dbPass.equals(pass))) {
                 currentUser = userStore.get(dbName);
+=======
+    public void onClick(View view) {
+        String name = username.getText().toString();
+        String pass = password.getText().toString();
+        String dbFName = "";
+        String dbLName = "";
+        String dbName = "";
+        String dbPass = "";
+        String dbStatus = "";
+        String dbEmail = "";
+        String dbMajor = "";
+        String dbAboutMe = "";
+
+        if (exists(name)) {
+            Cursor cursor = getData(name);
+            if (cursor.moveToFirst()){
+                while(!cursor.isAfterLast()){
+                    dbFName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIRST_NAME));
+                    dbLName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.LAST_NAME));
+                    dbName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USERNAME));
+                    dbPass = cursor.getString(cursor.getColumnIndex(DatabaseHelper.PASSWORD));
+                    dbStatus = cursor.getString(cursor.getColumnIndex(DatabaseHelper.STATUS));
+                    dbEmail = cursor.getString(cursor.getColumnIndex(DatabaseHelper.EMAIL));
+                    dbMajor = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MAJOR));
+                    dbAboutMe = cursor.getString(cursor.getColumnIndex(DatabaseHelper.ABOUT_ME)) ;
+                    cursor.moveToNext();
+                }
+            }
+            if ((dbName.equals(name)) && (dbPass.equals(pass))) {
+                currentUser = new User(dbFName,dbLName,dbName,dbPass, dbStatus, dbEmail, dbMajor,
+                        dbAboutMe);
+>>>>>>> master
                 Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(),
                         "Username or password is incorrect.", Toast.LENGTH_LONG).show();
             }
+<<<<<<< HEAD
+=======
+            cursor.close();
+>>>>>>> master
         }
     }
 
@@ -91,5 +140,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public boolean exists(String username){
+        Cursor cursor = readableDb.rawQuery("Select * from User_List where "
+                + DatabaseHelper.USERNAME + " = '" + username + "'", null);
+        cursor.moveToFirst();
+        if (cursor.getCount() <= 0) {
+            cursor.close();
+            return false;
+        }
+        return true;
+    }
+
+    public Cursor getData(String username){
+        Cursor cursor = readableDb.rawQuery("Select * from User_List where "
+                + DatabaseHelper.USERNAME + " = '" + username + "'", null);
+        return cursor;
+    }
 }
 

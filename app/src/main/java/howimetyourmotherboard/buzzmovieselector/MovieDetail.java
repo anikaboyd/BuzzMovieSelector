@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -17,15 +16,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class MovieDetail extends AppCompatActivity {
-    Movie currentMovie;
-    TextView title, synopsis, cast, rottenRating, myRating;
-    RatingBar ratingBar;
-    User currentUser;
-    HashMap<String,User> comments;
-    LinearLayout movieDetailLayout;
+    private TextView title, synopsis, cast, rottenRating, myRating;
+    private RatingBar ratingBar;
+    private HashMap<String,User> comments;
+    private LinearLayout movieDetailLayout;
+    static Movie currentMovie;
+    static User currentUser = MainActivity.currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +34,6 @@ public class MovieDetail extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        currentUser = MainActivity.getCurrentUser();
         Intent callingActivity = getIntent();
         if (callingActivity.getStringExtra("from").equals("NewReleases")) {
             currentMovie = NewReleases.currentMovie;

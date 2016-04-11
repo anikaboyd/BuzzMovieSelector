@@ -13,15 +13,19 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
-    static HashMap<String,User> userStore = new HashMap<>();
-    EditText firstName, lastName, username, password, verified, email;
+    private EditText firstName, lastName, username, password, verified, email;
+    private DatabaseHelper myDb;
+    private SQLiteDatabase readableDb;
 
+<<<<<<< HEAD
     static Database myDb;
     static SQLiteDatabase readableDb;
 
     public static HashMap<String,User> getUserStore() {
         return userStore;
     }
+=======
+>>>>>>> master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,11 @@ public class Register extends AppCompatActivity {
         verified = (EditText) findViewById(R.id.verifypassword);
         email = (EditText) findViewById(R.id.email);
 
+<<<<<<< HEAD
         myDb = new Database(this);
+=======
+        myDb = new DatabaseHelper(this);
+>>>>>>> master
         readableDb = myDb.getReadableDatabase();
 
     }
@@ -47,7 +55,11 @@ public class Register extends AppCompatActivity {
     public void onClick(View view) {
         User user = new User(firstName.getText().toString(),lastName.getText().toString(),
                 username.getText().toString(),password.getText().toString(),email.getText().toString());
+<<<<<<< HEAD
         //can enforce more things later like no blanks, spaces and password requirements
+=======
+
+>>>>>>> master
         if (!(user.getPassword().equals(verified.getText().toString()))) {
             Toast.makeText(getApplicationContext(),
                     "Passwords do not match!", Toast.LENGTH_LONG).show();
@@ -56,9 +68,14 @@ public class Register extends AppCompatActivity {
                     "Username already taken!", Toast.LENGTH_LONG).show();
         } else if ((user.getPassword().equals(verified.getText().toString())) &&
                 (!exists(user.getUsername()))) {
+<<<<<<< HEAD
             userStore.put(user.getUsername(), user);
             myDb.insert(user.getFirstName(), user.getEmail(), user.getUsername(),
                     user.getPassword(), user.getStatus(), user.getLastName(), user.getMajor(),
+=======
+            myDb.insert(user.getFirstName(), user.getLastName(), user.getUsername(),
+                    user.getPassword(), user.getStatus(), user.getEmail(), user.getMajor(),
+>>>>>>> master
                     user.getAboutMe());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -66,9 +83,15 @@ public class Register extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD
     public static boolean exists(String username){
         Cursor cursor = readableDb.rawQuery("Select * from USER_LIST where "
                 + Database.USERNAME + " = '" + username + "'", null);
+=======
+    public boolean exists(String username){
+        Cursor cursor = readableDb.rawQuery("Select * from User_List where "
+                + DatabaseHelper.USERNAME + " = '" + username + "'", null);
+>>>>>>> master
         cursor.moveToFirst();
         if (cursor.getCount() <= 0) {
             cursor.close();
@@ -77,6 +100,7 @@ public class Register extends AppCompatActivity {
         return true;
     }
 
+<<<<<<< HEAD
     public static Cursor getData(String username){
         Cursor cursor = readableDb.rawQuery("Select * from User_List where " + Database.USERNAME
                 + " = '" + username + "'", null);
@@ -84,3 +108,11 @@ public class Register extends AppCompatActivity {
     }
 }
 
+=======
+    public Cursor getData(String username){
+        Cursor cursor = readableDb.rawQuery("Select * from User_List where "
+                + DatabaseHelper.USERNAME + " = '" + username + "'", null);
+        return cursor;
+    }
+}
+>>>>>>> master
